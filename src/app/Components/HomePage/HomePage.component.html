@@ -1,0 +1,223 @@
+<body >
+  <div class="" style="height: 1px">
+    <img
+      src="https://www.sabihagokcencarrental.com/dosya/2710/blog/15-1-sabiha-gokcen-havalimani-nasil-arac-kiralanir_613.jpeg"
+      class="img-fluid"
+    />
+  </div>
+
+    <div class="container text-center">
+      <div>
+        <h1 class="text-center">
+          <h1 class="badge bg-white text-dark"></h1>
+          
+
+          <button class="btn btn-success" (click)="EkleModal(aracEkleme)">
+            Araba Ekle
+          </button>
+        </h1>
+      </div>
+    </div>
+
+    <tr>
+      <div class="row ms-5">
+        <div
+          class="card ms-5 mt-3"
+          style="width: 18rem"
+          *ngFor="let car of arabalar"
+        >
+          <div class="card border-lights mb-3">
+            <img
+              src="{{ car.img }}"
+              alt="resim"
+              style="height: 10rem; width: 16rem"
+              class="pt-3"
+            />
+            <div class="card-body">
+              <label class="card-title"
+                ><h3>{{ car.marka }}</h3></label
+              >
+              <p class="card-text">
+                <b>Günlük : {{ car.detay }} TL</b>
+              </p>
+            </div>
+            <ul class="list list-group">
+              <li class="list list-group-item">{{ car.model }}</li>
+              <li class="list list-group-item">{{car.categoryId}}</li>
+              <li class="list list-group-item">{{ car.yolcu }} Kişilik</li>
+              <li class="list list-group-item">{{ car.yakit }}</li>
+              <li class="list list-group-item">{{ car.uid }}</li>
+              <li class="list list-group-item">
+                Eklenme Tarihi : {{ car.kayit | date : "dd.MM.yy" }}
+              </li>
+            </ul>
+            <div class="list list-group" >
+              <!-- ! *ngIf="servis.AktifUyeBilgi.admin == 1" aktifüye bilgilerini almadığım için üyenin görmemesi gereken yerleri kapatamıyorum  --> 
+              <button class="alert alert-warning"[ngClass]="car.kira == 1  ? 'alert-danger' : 'alert-warning'"  (click)="DuzenleModal(car,aracEkleme)" >
+                <h5>Kiralamak İçin :</h5>
+                <b><p>+90 (533) 327 4232</p></b>
+              </button>
+              <button class="alert alert-warning" [ngClass]="car.kira == 1  ? 'alert-danger' : 'alert-warning'">
+                <h5>Kiralamak İçin :</h5>
+                <b><p>+90 (533) 327 4232</p></b>
+              </button>
+              <!-- ! Normalde ↑ buradaki kısım üye tarafından görülebilir olup kırmızı iken kiralanmış anlamına gelecek kısmı göreceklerdi -->
+            </div>
+            
+          </div>
+          <button class="btn btn-outline-danger" (click)="Sil(car)">Sil</button>
+        </div>
+      </div>
+    
+    </tr>
+  
+  <div class="pt-3">
+    <h2 class="text-center"><ul class="nav-item"></ul></h2>
+  </div>
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card border-primary">
+          <div class="card-body">
+            <h5 class="card-title text-primary">Biz Kimiz ?</h5>
+            <p class="card-text">
+              Antalyada Faaliyete geçen ve büyümekte olan, Araç Kiralama
+              platformuyuz.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card border-warning">
+          <div class="card-body">
+            <h5 class="card-title text-warning">Yardım ?</h5>
+            <p class="card-text">
+              Siz Değerli Müşterilerimiz için, 7/24 online hizmet veren ve bu
+              işi severek yapan bir platformuz.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card border-success">
+          <div class="card-body">
+            <h5 class="card-title text-success">Nasıl ?</h5>
+            <p class="card-text">
+              Araçlarımızı inceleyebilir, platformdaki numaradan bize ulaşabilir
+              ve hesabınıza tanımlayabiliriz.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card text-bg-dark m-3">
+    <img
+      src="https://t3.ftcdn.net/jpg/05/06/50/66/360_F_506506671_9X2n7yZZ1yOrX4aOQ65TzElu7u3N55HU.jpg"
+      class="card-img"
+      alt="..."
+      style="height: 13rem"
+    />
+    <div class="card-img-overlay">
+      <h1 class="card-title text-center">
+        Yalnızca <b class="text-warning"> Antalya'da</b> Hizmet Veren Firma
+      </h1>
+      <p class="card-text text-center">
+        Antalya'nın en çok tercih edilen araç kiralama firması olarak hizmet
+        vermekteyiz. <b> Rezervasyonlarda özel indirimler</b> ile müşterilerine
+        araç kiralama hizmetinde sınır tanımayan tek firma.
+      </p>
+
+      <p class="card-text text-center"><small>2 Gün Önce Güncellendi</small></p>
+    </div>
+  </div>
+
+  <footer class="row">
+    <br />
+    <br />
+    
+  </footer>
+</body>
+
+
+<div class="modal" tabindex="-1" #aracEkleme>
+  <div class="modal-dialog modal-dialog">
+    <form [formGroup]="ArabaModal" (ngSubmit)="ArabaEkleDuzenle()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"> Araç Ekle/Düzenle </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Araç Resmi Giriniz : </label>
+            <input type="text" class="form-control" formControlName="img" />
+
+            <label>Araç Markası Giriniz : </label>
+            <input type="text" class="form-control" formControlName="marka" />
+
+            <label>Araç Modeli Giriniz : </label>
+            <input type="text" class="form-control" formControlName="model" />
+
+            <label>Araç Detayı Giriniz : </label>
+            <input type="text" class="form-control" formControlName="detay" />
+
+            <label>Araç Yolcu Sayısı Giriniz : </label>
+            <input type="text" class="form-control" formControlName="yolcu" />
+
+            <label>Araç Yakıt Türü Giriniz : </label>
+            <select class="form-control" formControlName="yakit">
+              <option value="Benzinli">Benzin</option>
+              <option value="Dizel">Dizel</option>
+            </select>
+
+            <label>Araç Türü : </label>
+            <select class="form-control" formControlName="categoryId">
+              <option [value]="kat.katId" *ngFor="let kat of kategoriler">
+                {{ kat.adi }}
+              </option>
+            </select>
+
+            <label>Kiralandı Mı ? </label>
+            <select class="form-control" formControlName="kira">
+              <option value="1">Evet</option>
+              <option value="0">Hayır</option>
+            </select>
+
+            <label>Kim Kiraladı ? </label>
+
+            <select class="form-control" formControlName="uid">
+              <option [value]="kiraci.uid" *ngFor="let kiraci of kullanici">
+                {{ kiraci.displayName }}
+              </option>
+            </select>
+
+            <input
+              type="hidden"
+              class="form-control"
+              formControlName="arabaId"
+            />
+            <input type="hidden" class="form-control" formControlName="kayit" />
+            <input type="hidden" class="form-control" formControlName="duzen" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-outline-warning" />
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
